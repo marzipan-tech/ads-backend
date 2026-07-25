@@ -25,10 +25,6 @@ public class FileStorageServiceImpl implements FileStorageService {
     @Value("${file.upload-dir}")
     private String uploadDir;
 
-    private Path getRoot() {
-        return Paths.get(uploadDir);
-    }
-
     /**
      * Сохраняет изображение пользователя.
      */
