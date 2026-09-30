@@ -75,4 +75,16 @@ public class FileStorageServiceImpl implements FileStorageService {
             throw new FileStorageException("Error reading file");
         }
     }
+
+    @Override
+    public void delete(String oldImagePath) {
+        try {
+            Path root = Paths.get(uploadDir);
+            Path path = root.resolve(oldImagePath);
+            Files.deleteIfExists(path);
+        } catch (IOException exception) {
+            throw new FileStorageException("Error deleting old file");
+        }
+
+    }
 }
