@@ -72,8 +72,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUserImage(MultipartFile image) {
         User user = currentUserService.getCurrentUser();
+        String oldImagePath = user.getImage();
         String imagePath = fileStorageService.saveUserImage(user.getId(), image);
         user.setImage(imagePath);
+        if (oldImagePath != null && !oldImagePath.equals(imagePath)) {
+            fileStorageService.delete(oldImagePath);
+        }
         userRepository.save(user);
     }
 }

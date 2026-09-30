@@ -16,6 +16,7 @@ import java.util.List;
 public interface AdMapper {
     @Mapping(source = "id", target = "pk")
     @Mapping(source = "author.id", target = "author")
+    @Mapping(target = "image", expression = "java(ad.getImage() == null ? null : \"/images/\" + ad.getImage())")
     AdResponseDto adToDto(Ad ad);
 
     @Mapping(source = "id", target = "pk")
@@ -23,6 +24,7 @@ public interface AdMapper {
     @Mapping(source = "author.lastName", target = "authorLastName")
     @Mapping(source = "author.username", target = "email")
     @Mapping(source = "author.phone", target = "phone")
+    @Mapping(target = "image", expression = "java(ad.getImage() == null ? null : \"/images/\" + ad.getImage())")
     ExtendedAdResponseDto extendedAdToDto(Ad ad);
 
     List<AdResponseDto> adsToDtoList(List<Ad> ads);

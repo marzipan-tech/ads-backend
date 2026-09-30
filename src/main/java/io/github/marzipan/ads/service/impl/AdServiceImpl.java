@@ -128,8 +128,12 @@ public class AdServiceImpl implements AdService {
     @Override
     public void updateImage(Integer id, MultipartFile image) {
         Ad ad = getAdOrThrow(id);
+        String oldImagePath = ad.getImage();
         String imagePath = fileStorageService.saveAdImage(ad.getId(), image);
         ad.setImage(imagePath);
+        if (oldImagePath != null && !oldImagePath.equals(imagePath)) {
+            fileStorageService.delete(oldImagePath);
+        }
         adRepository.save(ad);
     }
 

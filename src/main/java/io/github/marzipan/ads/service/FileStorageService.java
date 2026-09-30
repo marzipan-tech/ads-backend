@@ -8,4 +8,6 @@ public interface FileStorageService {
     String saveAdImage(Integer id, MultipartFile image);
 
     byte[] getImage(String path);
+
+    void delete(String oldImagePath);
 }

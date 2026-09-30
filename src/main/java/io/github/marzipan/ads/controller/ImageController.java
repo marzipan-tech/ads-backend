@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.github.marzipan.ads.service.FileStorageService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Контроллер для загрузки и получения изображений.
@@ -27,7 +29,7 @@ public class ImageController {
      */
     @GetMapping(value = "/**", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_GIF_VALUE, MediaType.IMAGE_JPEG_VALUE})
     public ResponseEntity<byte[]> getImage(HttpServletRequest request) {
-        String path = request.getRequestURI().replace("/images", "");
+        String path = URLDecoder.decode(request.getRequestURI().replaceFirst("/images", ""), StandardCharsets.UTF_8);
         byte[] image = fileStorageService.getImage(path);
         return ResponseEntity.ok(image);
     }
