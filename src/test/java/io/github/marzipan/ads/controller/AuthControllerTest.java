@@ -47,7 +47,7 @@ public class AuthControllerTest {
                 + "\"password\": \"password\","
                 + "\"firstName\": \"name\","
                 + "\"lastName\": \"surname\","
-                + "\"phone\": \"phone\","
+                + "\"phone\": \"+79051234567\","
                 + "\"role\": \"USER\""
                 + "}";
         mockMvc.perform(post("/register")

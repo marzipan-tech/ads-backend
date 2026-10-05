@@ -2,9 +2,9 @@ package io.github.marzipan.ads.dto.request;
 
 import lombok.Data;
 import io.github.marzipan.ads.entity.Role;
-import lombok.NonNull;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -31,5 +31,6 @@ public class RegisterRequestDto {
     @Pattern(regexp = "\\+7\\s?\\(?\\d{3}\\)?\\s?\\d{3}-?\\d{2}-?\\d{2}")
     private String phone;
 
+    @NotNull
     private Role role;
 }
