@@ -116,7 +116,11 @@ public class AdServiceImpl implements AdService {
     @Override
     public void deleteAd(Integer id) {
         Ad ad = getAdOrThrow(id);
+        String imagePath = ad.getImage();
         adRepository.delete(ad);
+        if (imagePath != null) {
+            fileStorageService.delete(imagePath);
+        }
     }
 
     /**

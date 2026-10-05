@@ -12,6 +12,8 @@ import io.github.marzipan.ads.dto.request.LoginRequestDto;
 import io.github.marzipan.ads.dto.request.RegisterRequestDto;
 import io.github.marzipan.ads.service.AuthService;
 
+import javax.validation.Valid;
+
 /**
  * Контроллер аутентификации и регистрации пользователей.
  * Отвечает за:
@@ -19,7 +21,6 @@ import io.github.marzipan.ads.service.AuthService;
  * - регистрацию новых пользователей.
  */
 @Slf4j
-@CrossOrigin(value = "http://localhost:3000")
 @RestController
 @RequiredArgsConstructor
 public class AuthController {
@@ -31,7 +32,7 @@ public class AuthController {
      * @param login данные для входа (имя пользователя, пароль)
      */
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequestDto login) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDto login) {
         authService.login(login.getUsername(), login.getPassword());
         return ResponseEntity.ok().build();
     }
@@ -41,7 +42,7 @@ public class AuthController {
      * @param register данные пользователя
      */
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequestDto register) {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequestDto register) {
         authService.register(register);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
